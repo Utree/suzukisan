@@ -10,43 +10,49 @@ navigator.mediaDevices.getUserMedia({video: false, audio: true})
         // $('#my-video').get(0).srcObject = stream;
         localStream = stream;
         updateAudioEnable(false)
+        connect()
     }).catch(function (error) {
     // Error
     console.error('mediaDevice.getUserMedia() error:', error);
     return;
 });
 
-peer = new Peer({
-    key: '339d7027-558e-4bc8-a59a-64478447ce23',
-    debug: 3
-});
+function connect() {
+    peer = new Peer({
+        key: '339d7027-558e-4bc8-a59a-64478447ce23',
+        debug: 3
+    });
 
-peer.on('open', function(){
-    postRoomId(peer.id);
-    $('#my-id').text(peer.id);
-    console.log(peer.id);
-});
+    peer.on('open', function(){
+        postRoomId(peer.id);
+        $('#my-id').text(peer.id);
+        console.log(peer.id);
 
-peer.on('error', function(err){
-    alert(err.message);
-});
+        if (roomName != "wait") {
+            callPartner()
+        }
+    });
 
-peer.on('close', function(){
-});
+    peer.on('error', function(err){
+        alert(err.message);
+    });
 
-peer.on('disconnected', function(){
-});
+    peer.on('close', function(){
+    });
 
-peer.on('call', function(call){
-    call.answer(localStream);
-    partnerUserName = call.metadata.partnerUserName;
-    partnerUserId = call.metadata.partnerUserId;
-    setupCallEventHandlers(call);
-});
+    peer.on('disconnected', function(){
+    });
 
-if (roomName != "wait") {
-    setTimeout(callPartner, 1*1000);
+    peer.on('call', function(call){
+        call.answer(localStream);
+        partnerUserName = call.metadata.partnerUserName;
+        partnerUserId = call.metadata.partnerUserId;
+        setupCallEventHandlers(call);
+    });
 }
+
+
+
 
 function callPartner() {
     const call = peer.call(roomName, localStream, {

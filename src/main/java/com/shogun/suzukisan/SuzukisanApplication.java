@@ -9,7 +9,7 @@ import com.shogun.suzukisan.service.GenreService;
 import com.shogun.suzukisan.service.MentorGenreService;
 import com.shogun.suzukisan.service.MentorService;
 import com.shogun.suzukisan.service.UserService;
-import javafx.application.Application;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -22,7 +22,7 @@ import java.util.Optional;
 @SpringBootApplication
 public class SuzukisanApplication {
 
-    private static final Logger log = LoggerFactory.getLogger(Application.class);
+    private static final Logger log = LoggerFactory.getLogger(SuzukisanApplication.class);
 
     public static void main(String[] args) {
         SpringApplication.run(SuzukisanApplication.class, args);
