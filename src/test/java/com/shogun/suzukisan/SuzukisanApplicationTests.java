@@ -4,7 +4,6 @@ import com.shogun.suzukisan.entity.*;
 import com.shogun.suzukisan.repository.GenreRepository;
 import com.shogun.suzukisan.repository.UserRepository;
 import com.shogun.suzukisan.service.*;
-import javafx.application.Application;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -20,7 +19,7 @@ import java.util.*;
 @SpringBootTest
 public class SuzukisanApplicationTests {
 
-    final Logger log = LoggerFactory.getLogger(Application.class);
+    final Logger log = LoggerFactory.getLogger(SuzukisanApplicationTests.class);
 
     @Autowired
     UserRepository userRepository;
